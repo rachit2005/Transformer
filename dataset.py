@@ -59,19 +59,19 @@ class BiLingualDataset(Dataset):
             self.sos,
             torch.tensor(enc_input_tokens, dtype=torch.int64),
             self.eos,
-            torch.tensor([self.pad] * enc_num_padding, dtype=torch.int64)
+            torch.tensor([self.pad.item()] * enc_num_padding, dtype=torch.int64)
         ])
 
         decoder_input = torch.cat([
             self.sos,
             torch.tensor(dec_input_tokens, dtype=torch.int64),
-            torch.tensor([self.pad] * dec_num_padding, dtype=torch.int64)
+            torch.tensor([self.pad.item()] * dec_num_padding, dtype=torch.int64)
         ])
 
         label = torch.cat([
             torch.tensor(dec_input_tokens, dtype=torch.int64),
             self.eos,
-            torch.tensor([self.pad] * dec_num_padding, dtype=torch.int64)
+            torch.tensor([self.pad.item()] * dec_num_padding, dtype=torch.int64)
         ])
 
         assert encoder_input.size(0) == self.seq_length
